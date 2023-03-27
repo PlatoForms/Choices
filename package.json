@@ -1,7 +1,7 @@
 {
   "name": "platoforms-choices",
   "version": "1.0.0",
-  "description": "PlatoForms choices widget from \"A vanilla JS customisable text input/select box plugin\"",
+  "description": "PlatoForms choices widget fork from https://github.com/Choices-js/Choices",
   "scripts": {
     "build": "run-p js:build css:build",
     "js:build": "webpack --config webpack.config.prod.js",
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://bitbucket.com/"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "devDependencies": {
     "@anephenix/sarus": "^0.4.3",
     "@babel/core": "^7.15.0",
