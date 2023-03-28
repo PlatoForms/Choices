@@ -15,6 +15,7 @@
     "type": "git",
     "url": "git+https://bitbucket.com/"
   },
+  "main": "public/assets/scripts/choices.js",
   "license": "MIT",
   "devDependencies": {
     "@anephenix/sarus": "^0.4.3",
