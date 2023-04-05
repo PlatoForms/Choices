@@ -337,4 +337,22 @@
   opacity: 0.5;
 }
 
+.search-input-container.choices .choices__inner .choices__input.choices__input--cloned {
+  display: none;
+  border-bottom: 0;
+  background-color: #f9f9f9;
+}
+
+.search-input-container.choices .choices__inner .choices__list.choices__list--single {
+  display: inline-block;
+}
+
+.search-input-container.choices.is-open .choices__inner .choices__input.choices__input--cloned {
+  display: inline-block;
+}
+
+.search-input-container.choices.is-open .choices__inner .choices__list.choices__list--single {
+  display: none;
+}
+
 /* =====  End of Choices  ====== */

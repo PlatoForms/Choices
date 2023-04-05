@@ -410,4 +410,20 @@ $choices-z-index: 1 !default;
   opacity: 0.5;
 }
 
+.search-input-container.#{$choices-selector} .#{$choices-selector}__inner .#{$choices-selector}__input.#{$choices-selector}__input--cloned{
+    display: none;
+    border-bottom: 0;
+    background-color: #f9f9f9;
+}
+.search-input-container.#{$choices-selector} .#{$choices-selector}__inner .#{$choices-selector}__list.#{$choices-selector}__list--single{
+    display: inline-block;
+}
+
+.search-input-container.#{$choices-selector}.is-open .#{$choices-selector}__inner .#{$choices-selector}__input.#{$choices-selector}__input--cloned{
+    display: inline-block;
+}
+.search-input-container.#{$choices-selector}.is-open .#{$choices-selector}__inner .#{$choices-selector}__list.#{$choices-selector}__list--single{
+    display: none;
+}
+
 /* =====  End of Choices  ====== */

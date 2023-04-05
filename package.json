@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "PlatoForms choices widget fork from https://github.com/Choices-js/Choices",
   "scripts": {
+    "dev": "webpack --mode=development --config webpack.config.prod.js --watch",
     "build": "run-p js:build css:build",
     "js:build": "webpack --config webpack.config.prod.js",
     "css:build": "run-s css:sass css:prefix css:min",

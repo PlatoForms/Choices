@@ -1695,6 +1695,12 @@ var Choices = /** @class */function () {
       groupValue: group && group.value ? group.value : null,
       keyCode: keyCode
     });
+    var selected_val = this.getValue();
+    if (this.config.hidePlaceholderAfterSelection === true) {
+      if (Array.isArray(selected_val) && selected_val.length > 0) {
+        this.input.placeholder = '';
+      }
+    }
   };
   Choices.prototype._removeItem = function (item) {
     var id = item.id,
@@ -1715,6 +1721,13 @@ var Choices = /** @class */function () {
       customProperties: customProperties,
       groupValue: group && group.value ? group.value : null
     });
+    var selected_val = this.getValue();
+    if (this.config.hidePlaceholderAfterSelection === true) {
+      if (Array.isArray(selected_val) && selected_val.length <= 0) {
+        this.input.placeholder = this._placeholderValue || '';
+        this.input.setWidth();
+      }
+    }
   };
   Choices.prototype._addChoice = function (_a) {
     var value = _a.value,
@@ -1825,6 +1838,9 @@ var Choices = /** @class */function () {
       type: this.passedElement.element.type,
       position: this.config.position
     });
+    if (this.config.keepSearchInputInOriginalPosition) {
+      this.containerOuter.element.classList.add('search-input-container');
+    }
     this.containerInner = new components_1.Container({
       element: this._getTemplate('containerInner'),
       classNames: this.config.classNames,
@@ -1871,7 +1887,11 @@ var Choices = /** @class */function () {
     if (!this._isSelectOneElement) {
       this.containerInner.element.appendChild(this.input.element);
     } else if (this.config.searchEnabled) {
-      this.dropdown.element.insertBefore(this.input.element, this.dropdown.element.firstChild);
+      if (this.config.keepSearchInputInOriginalPosition) {
+        this.containerInner.element.appendChild(this.input.element);
+      } else {
+        this.dropdown.element.insertBefore(this.input.element, this.dropdown.element.firstChild);
+      }
     }
     if (this._isSelectElement) {
       this._highlightPosition = 0;
@@ -2895,6 +2915,8 @@ exports.DEFAULT_CONFIG = {
   sorter: utils_1.sortByAlpha,
   placeholder: true,
   placeholderValue: null,
+  hidePlaceholderAfterSelection: false,
+  keepSearchInputInOriginalPosition: false,
   searchPlaceholderValue: null,
   prependValue: null,
   appendValue: null,

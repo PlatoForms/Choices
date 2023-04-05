@@ -1996,6 +1996,13 @@ class Choices implements Choices {
       groupValue: group && group.value ? group.value : null,
       keyCode,
     });
+
+    let selected_val = this.getValue()
+    if (this.config.hidePlaceholderAfterSelection === true) {
+        if (Array.isArray(selected_val) && selected_val.length > 0) {
+            this.input.placeholder = '';
+        }
+    }
   }
 
   _removeItem(item: Item): void {
@@ -2015,6 +2022,14 @@ class Choices implements Choices {
       customProperties,
       groupValue: group && group.value ? group.value : null,
     });
+
+    let selected_val = this.getValue()
+    if (this.config.hidePlaceholderAfterSelection === true) {
+        if (Array.isArray(selected_val) && selected_val.length <= 0) {
+            this.input.placeholder = this._placeholderValue || '';
+            this.input.setWidth();
+        }
+    }
   }
 
   _addChoice({
@@ -2151,6 +2166,10 @@ class Choices implements Choices {
       position: this.config.position,
     });
 
+    if (this.config.keepSearchInputInOriginalPosition) {
+        this.containerOuter.element.classList.add('search-input-container')
+    }
+
     this.containerInner = new Container({
       element: this._getTemplate('containerInner'),
       classNames: this.config.classNames,
@@ -2206,10 +2225,14 @@ class Choices implements Choices {
     if (!this._isSelectOneElement) {
       this.containerInner.element.appendChild(this.input.element);
     } else if (this.config.searchEnabled) {
-      this.dropdown.element.insertBefore(
-        this.input.element,
-        this.dropdown.element.firstChild,
-      );
+        if (this.config.keepSearchInputInOriginalPosition) {
+            this.containerInner.element.appendChild(this.input.element);
+        } else {
+            this.dropdown.element.insertBefore(
+                this.input.element,
+                this.dropdown.element.firstChild
+            );
+        }
     }
 
     if (this._isSelectElement) {

@@ -58,6 +58,8 @@ export const DEFAULT_CONFIG: Options = {
   sorter: sortByAlpha,
   placeholder: true,
   placeholderValue: null,
+  hidePlaceholderAfterSelection: false,
+  keepSearchInputInOriginalPosition: false,
   searchPlaceholderValue: null,
   prependValue: null,
   appendValue: null,
