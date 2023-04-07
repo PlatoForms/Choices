@@ -100,7 +100,7 @@ $choices-z-index: 1 !default;
     display: none;
   }
 
-  &::after {
+  /* &::after {
     content: "";
     height: 0;
     width: 0;
@@ -112,18 +112,68 @@ $choices-z-index: 1 !default;
     top: 50%;
     margin-top: -2.5px;
     pointer-events: none;
+  } */
+
+  /* .arrow-down {
+    position: relative;
+    width: 20px;
+    height: 20px;
+  } */
+
+  &::before,
+  &::after {
+    content: "";
+    height: 6px;
+    width: 0px;
+    position: absolute;
+    bottom: 0;
+    border-style: solid;
+    border-color: $choices-text-color;
+    right: 11.5px;
+    top: 50%;
+    margin-top: -2.5px;
+    pointer-events: none;
+    border-width: 0 2px 2px 0;
   }
 
-  &.is-open::after {
+  &::after {
+    right: 14.5px;
+  }
+
+  &::before {
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  /* &.is-open::after {
     border-color: transparent transparent $choices-text-color transparent;
     margin-top: -7.5px;
+  } */
+
+  &.is-open::before {
+    transform: translateX(-50%) rotate(-45deg);
+  }
+  &.is-open::after {
+    transform: translateX(-50%) rotate(45deg);
   }
 
   &[dir="rtl"] {
-    &::after {
+    /* &::after {
       left: 11.5px;
       right: auto;
+    } */
+    &::after {
+        left: 11.5px;
+        right: auto;
     }
+    &::before {
+        left: 14.5px;
+        right: auto;
+    }
+
     .#{$choices-selector}__button {
       right: auto;
       left: 0;
@@ -157,6 +207,61 @@ $choices-z-index: 1 !default;
     &:hover,
     &:focus {
       opacity: 1;
+    }
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    height: 6px;
+    width: 0px;
+    position: absolute;
+    bottom: 0;
+    border-style: solid;
+    border-color: $choices-text-color;
+    right: 11.5px;
+    top: 50%;
+    margin-top: -2.5px;
+    pointer-events: none;
+    border-width: 0 2px 2px 0;
+  }
+
+  &::after {
+    right: 14.5px;
+  }
+
+  &::before {
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  &.is-open::before {
+    transform: translateX(-50%) rotate(-45deg);
+  }
+  &.is-open::after {
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .#{$choices-selector}__inner {
+    padding-right: 20px;
+  }
+
+  &[dir="rtl"] {
+    &::after {
+        left: 11.5px;
+        right: auto;
+    }
+    &::before {
+        left: 14.5px;
+        right: auto;
+    }
+
+    .#{$choices-selector}__inner {
+        padding-left: 20px;
+        padding-right: 7.5px;
     }
   }
 }
