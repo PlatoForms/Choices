@@ -545,6 +545,14 @@ var Choices = /** @class */function () {
       }
       _this.passedElement.triggerEvent(constants_1.EVENTS.showDropdown, {});
     });
+    if (this._isSelectOneElement && this.config.keepSearchInputInOriginalPosition) {
+      var selected_val = this.getValue();
+      if (typeof selected_val === 'object' && selected_val.label) {
+        this.input.placeholder = selected_val.label;
+      } else if (selected_val === undefined) {
+        this.input.placeholder = '';
+      }
+    }
     return this;
   };
   Choices.prototype.hideDropdown = function (preventInputBlur) {

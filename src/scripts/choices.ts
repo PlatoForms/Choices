@@ -509,6 +509,15 @@ class Choices implements Choices {
       this.passedElement.triggerEvent(EVENTS.showDropdown, {});
     });
 
+    if (this._isSelectOneElement && this.config.keepSearchInputInOriginalPosition) {
+        let selected_val = this.getValue() as Item
+        if (typeof selected_val === 'object' && selected_val.label) {
+            this.input.placeholder = selected_val.label
+        } else if (selected_val === undefined) {
+            this.input.placeholder = ''
+        }
+    }
+
     return this;
   }
 
