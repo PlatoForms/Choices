@@ -1846,7 +1846,7 @@ var Choices = /** @class */function () {
       type: this.passedElement.element.type,
       position: this.config.position
     });
-    if (this.config.keepSearchInputInOriginalPosition) {
+    if (this._isSelectOneElement && this.config.keepSearchInputInOriginalPosition) {
       this.containerOuter.element.classList.add('search-input-container');
     }
     this.containerInner = new components_1.Container({

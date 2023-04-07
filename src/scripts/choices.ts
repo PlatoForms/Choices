@@ -2175,7 +2175,7 @@ class Choices implements Choices {
       position: this.config.position,
     });
 
-    if (this.config.keepSearchInputInOriginalPosition) {
+    if (this._isSelectOneElement && this.config.keepSearchInputInOriginalPosition) {
         this.containerOuter.element.classList.add('search-input-container')
     }
 
