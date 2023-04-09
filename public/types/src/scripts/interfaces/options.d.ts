@@ -310,7 +310,7 @@ export interface Options {
      */
     searchPlaceholderValue: string | null;
     /**
-     * A boolean variable that determines whether to hide the placeholder text in a select element as soon as the user selects an option ("hidePlaceholderAfterSelection"). When set to true, the placeholder text will be hidden as soon as the user selects an option. When set to false, the placeholder text will remain visible until the user selects an option, and then it will be hidden.
+     * A boolean variable that determines whether to hide the placeholder text in a select element as soon as the user selects an option ("hidePlaceholderAfterSelection"). When set to true, the placeholder text will be hidden as soon as the user selects an option. When set to false, the placeholder text will remain visible.
      *
      * **Input types affected:** select-one, select-multiple
      *

@@ -1,6 +1,6 @@
 {
   "name": "platoforms-choices",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PlatoForms choices widget fork from https://github.com/Choices-js/Choices",
   "scripts": {
     "dev": "webpack --mode=development --config webpack.config.prod.js --watch",

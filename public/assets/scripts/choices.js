@@ -1,4 +1,4 @@
-/*! platoforms-choices v1.0.0 | © 2023 Dapeng Ni | undefined */
+/*! platoforms-choices v1.0.1 | © 2023 Dapeng Ni | undefined */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
