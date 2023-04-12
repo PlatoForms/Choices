@@ -76,6 +76,7 @@ export const DEFAULT_CONFIG: Options = {
   fuseOptions: {
     includeScore: true,
   },
+  notUseFuse: false,
   labelId: '',
   callbackOnInit: null,
   callbackOnCreateTemplates: null,

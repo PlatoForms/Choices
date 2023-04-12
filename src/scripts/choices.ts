@@ -1339,12 +1339,52 @@ class Choices implements Choices {
     // If new value matches the desired length and is not the same as the current value with a space
     const haystack = this._store.searchableChoices;
     const needle = newValue;
-    const options = Object.assign(this.config.fuseOptions, {
-      keys: [...this.config.searchFields],
-      includeMatches: true,
-    }) as Fuse.IFuseOptions<Choice>;
-    const fuse = new Fuse(haystack, options);
-    const results: Result<Choice>[] = fuse.search(needle) as any[]; // see https://github.com/krisk/Fuse/issues/303
+
+    let results: Result<Choice>[] = []
+    if (!this.config.notUseFuse) {
+        const options = Object.assign(this.config.fuseOptions, {
+            keys: [...this.config.searchFields],
+            includeMatches: true,
+        }) as Fuse.IFuseOptions<Choice>;
+        const fuse = new Fuse(haystack, options);
+        results = fuse.search(needle) as any[]; // see https://github.com/krisk/Fuse/issues/303
+    } else {
+        let searchArray = (list, query) => {
+            const regex = new RegExp(query, 'gi');
+            return list.map(item => {
+                let test_str = ''
+                let test_str_arr:string[] = []
+                this.config.searchFields.forEach((key) => {
+                    test_str_arr.push(item[key])
+                })
+
+                if (test_str_arr.length > 0) {
+                    test_str = test_str_arr.join(',')
+                }
+
+                if (test_str) {
+                    let match_index = test_str.search(regex);
+                    if (match_index > 0) {
+                        return {
+                            item: item,
+                            score: 1 - (1 / match_index)
+                        };
+                    } else if (match_index === 0) {
+                        return {
+                            item: item,
+                            score: 0
+                        };
+                    } else {
+                        return null;
+                    }
+                } else {
+                    return null;
+                }
+            }).filter(item => item !== null);
+        }
+
+        results = searchArray(haystack, needle)
+    }
 
     this._currentValue = newValue;
     this._highlightPosition = 0;

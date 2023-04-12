@@ -429,6 +429,10 @@ export interface Options {
      */
     fuseOptions: Fuse.IFuseOptions<Choices>;
     /**
+     * Do not use Fuse js package
+     */
+    notUseFuse: Boolean;
+    /**
      * ID of the connected label to improve a11y. If set, aria-labelledby will be added.
      */
     labelId: string;

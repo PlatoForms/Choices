@@ -1,4 +1,4 @@
-/*! platoforms-choices v1.0.1 | © 2023 Dapeng Ni | undefined */
+/*! platoforms-choices v1.0.2 | © 2023 Dapeng Ni | undefined */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -1185,6 +1185,7 @@ var Choices = /** @class */function () {
     };
   };
   Choices.prototype._searchChoices = function (value) {
+    var _this = this;
     var newValue = typeof value === 'string' ? value.trim() : value;
     var currentValue = typeof this._currentValue === 'string' ? this._currentValue.trim() : this._currentValue;
     if (newValue.length < 1 && newValue === "".concat(currentValue, " ")) {
@@ -1193,12 +1194,50 @@ var Choices = /** @class */function () {
     // If new value matches the desired length and is not the same as the current value with a space
     var haystack = this._store.searchableChoices;
     var needle = newValue;
-    var options = Object.assign(this.config.fuseOptions, {
-      keys: __spreadArray([], this.config.searchFields, true),
-      includeMatches: true
-    });
-    var fuse = new fuse_js_1.default(haystack, options);
-    var results = fuse.search(needle); // see https://github.com/krisk/Fuse/issues/303
+    var results = [];
+    if (!this.config.notUseFuse) {
+      var options = Object.assign(this.config.fuseOptions, {
+        keys: __spreadArray([], this.config.searchFields, true),
+        includeMatches: true
+      });
+      var fuse = new fuse_js_1.default(haystack, options);
+      results = fuse.search(needle); // see https://github.com/krisk/Fuse/issues/303
+    } else {
+      var searchArray = function (list, query) {
+        var regex = new RegExp(query, 'gi');
+        return list.map(function (item) {
+          var test_str = '';
+          var test_str_arr = [];
+          _this.config.searchFields.forEach(function (key) {
+            test_str_arr.push(item[key]);
+          });
+          if (test_str_arr.length > 0) {
+            test_str = test_str_arr.join(',');
+          }
+          if (test_str) {
+            var match_index = test_str.search(regex);
+            if (match_index > 0) {
+              return {
+                item: item,
+                score: 1 - 1 / match_index
+              };
+            } else if (match_index === 0) {
+              return {
+                item: item,
+                score: 0
+              };
+            } else {
+              return null;
+            }
+          } else {
+            return null;
+          }
+        }).filter(function (item) {
+          return item !== null;
+        });
+      };
+      results = searchArray(haystack, needle);
+    }
     this._currentValue = newValue;
     this._highlightPosition = 0;
     this._isSearching = true;
@@ -2947,6 +2986,7 @@ exports.DEFAULT_CONFIG = {
   fuseOptions: {
     includeScore: true
   },
+  notUseFuse: false,
   labelId: '',
   callbackOnInit: null,
   callbackOnCreateTemplates: null,
