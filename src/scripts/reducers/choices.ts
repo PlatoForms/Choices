@@ -25,12 +25,16 @@ export default function choices(
   switch (action.type) {
     case 'ADD_CHOICE': {
       const addChoiceAction = action as AddChoiceAction;
+
+      // if label is empty string, keep empty
+
       const choice = {
         id: addChoiceAction.id,
         elementId: addChoiceAction.elementId,
         groupId: addChoiceAction.groupId,
         value: addChoiceAction.value,
-        label: addChoiceAction.label || addChoiceAction.value,
+        label: addChoiceAction.label || '',
+        // label: addChoiceAction.label || addChoiceAction.value,
         disabled: addChoiceAction.disabled || false,
         selected: false,
         active: true,

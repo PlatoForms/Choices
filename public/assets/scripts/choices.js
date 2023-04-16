@@ -1708,7 +1708,9 @@ var Choices = /** @class */function () {
       keyCode = _g === void 0 ? -1 : _g;
     var passedValue = typeof value === 'string' ? value.trim() : value;
     var items = this._store.items;
-    var passedLabel = label || passedValue;
+    // if label is empty string, keep empty
+    var passedLabel = label || '';
+    // const passedLabel = label || passedValue;
     var passedOptionId = choiceId || -1;
     var group = groupId >= 0 ? this._store.getGroupById(groupId) : null;
     var id = items ? items.length + 1 : 1;
@@ -1797,7 +1799,9 @@ var Choices = /** @class */function () {
     }
     // Generate unique id
     var choices = this._store.choices;
-    var choiceLabel = label || value;
+    // const choiceLabel = label || value;
+    // if label is empty string, keep empty
+    var choiceLabel = label || '';
     var choiceId = choices ? choices.length + 1 : 1;
     var choiceElementId = "".concat(this._baseId, "-").concat(this._idNames.itemChoice, "-").concat(choiceId);
     this._store.dispatch((0, choices_1.addChoice)({
@@ -3415,12 +3419,14 @@ function choices(state, action) {
     case 'ADD_CHOICE':
       {
         var addChoiceAction = action;
+        // if label is empty string, keep empty
         var choice = {
           id: addChoiceAction.id,
           elementId: addChoiceAction.elementId,
           groupId: addChoiceAction.groupId,
           value: addChoiceAction.value,
-          label: addChoiceAction.label || addChoiceAction.value,
+          label: addChoiceAction.label || '',
+          // label: addChoiceAction.label || addChoiceAction.value,
           disabled: addChoiceAction.disabled || false,
           selected: false,
           active: true,
@@ -4115,6 +4121,9 @@ var templates = {
     } else {
       div.classList.add(itemSelectable);
       div.dataset.choiceSelectable = '';
+    }
+    if (!label || label === '') {
+      div.classList.add('empty-label');
     }
     return div;
   },

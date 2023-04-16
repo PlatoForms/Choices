@@ -444,6 +444,12 @@ $choices-z-index: 1 !default;
   cursor: default;
 }
 
+.#{$choices-selector}__item.empty-label::before {
+    content: 'W';
+    color: transparent;
+    font-size: 14px;
+}
+
 .#{$choices-selector}__item--selectable {
   cursor: pointer;
 }

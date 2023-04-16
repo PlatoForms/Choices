@@ -372,6 +372,12 @@
   cursor: default;
 }
 
+.choices__item.empty-label::before {
+  content: "W";
+  color: transparent;
+  font-size: 14px;
+}
+
 .choices__item--selectable {
   cursor: pointer;
 }

@@ -255,6 +255,10 @@ const templates = {
       div.dataset.choiceSelectable = '';
     }
 
+    if (!label || label === '') {
+        div.classList.add('empty-label')
+    }
+
     return div;
   },
 

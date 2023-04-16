@@ -2004,7 +2004,11 @@ class Choices implements Choices {
     let passedValue = typeof value === 'string' ? value.trim() : value;
 
     const { items } = this._store;
-    const passedLabel = label || passedValue;
+
+    // if label is empty string, keep empty
+    const passedLabel = label || '';
+    // const passedLabel = label || passedValue;
+
     const passedOptionId = choiceId || -1;
     const group = groupId >= 0 ? this._store.getGroupById(groupId) : null;
     const id = items ? items.length + 1 : 1;
@@ -2106,7 +2110,11 @@ class Choices implements Choices {
 
     // Generate unique id
     const { choices } = this._store;
-    const choiceLabel = label || value;
+
+    // const choiceLabel = label || value;
+    // if label is empty string, keep empty
+    const choiceLabel = label || '';
+
     const choiceId = choices ? choices.length + 1 : 1;
     const choiceElementId = `${this._baseId}-${this._idNames.itemChoice}-${choiceId}`;
 
