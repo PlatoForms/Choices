@@ -205,12 +205,13 @@
           name="choices-multiple-remove-button"
           id="choices-multiple-remove-button"
           placeholder="This is a placeholder"
-          multiple
         >
+          <option value>Choose One</option>
           <option value="Choice 1" selected>Choice 1</option>
           <option value="Choice 2">Choice 2</option>
           <option value="Choice 3">Choice 3</option>
           <option value="Choice 4">Choice 4</option>
+          <option data-value="<b>111</b>" value="3">&lt;b&gt;111&lt;/b&gt;</option>
         </select>
 
         <label for="choices-multiple-groups">Option groups</label>
@@ -665,8 +666,11 @@
           {
             allowHTML: true,
             removeItemButton: true,
+            setPlaceholderValueWhenRemoveAll: true,
+            placeholderValue: 'zzzzz11',
           }
         );
+        window.multipleCancelButton = multipleCancelButton;
 
         /* Use label on event */
         var choicesSelect = new Choices('#choices-multiple-labels', {

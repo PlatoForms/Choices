@@ -60,6 +60,7 @@ export const DEFAULT_CONFIG: Options = {
   placeholderValue: null,
   hidePlaceholderAfterSelection: false,
   keepSearchInputInOriginalPosition: false,
+  setPlaceholderValueWhenRemoveAll: false,
   searchPlaceholderValue: null,
   prependValue: null,
   appendValue: null,

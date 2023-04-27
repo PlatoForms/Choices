@@ -358,6 +358,16 @@ export interface Options {
   keepSearchInputInOriginalPosition: boolean | null;
 
   /**
+   *
+   * if set ture, after remove All active item, call setChoiceByValue, value is ''
+   *
+   * **Input types affected:** select-one
+   *
+   * @default null
+   */
+  setPlaceholderValueWhenRemoveAll: boolean | null;
+
+  /**
    * Prepend a value to each item added/selected.
    *
    * **Input types affected:** text, select-one, select-multiple

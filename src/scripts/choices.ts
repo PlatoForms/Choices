@@ -509,10 +509,19 @@ class Choices implements Choices {
       this.passedElement.triggerEvent(EVENTS.showDropdown, {});
     });
 
+    var xmlDecode = (str) => {
+        let doc = new DOMParser().parseFromString(str, 'text/html')
+        let val = doc.documentElement.textContent
+        if (val) {
+            return val
+        }
+        return ''
+    }
+
     if (this._isSelectOneElement && this.config.keepSearchInputInOriginalPosition) {
         let selected_val = this.getValue() as Item
         if (typeof selected_val === 'object' && selected_val.label) {
-            this.input.placeholder = selected_val.label
+            this.input.placeholder = xmlDecode(selected_val.label)
         } else if (selected_val === undefined) {
             this.input.placeholder = ''
         }
@@ -568,6 +577,16 @@ class Choices implements Choices {
   setChoiceByValue(value: string | string[]): this {
     if (!this.initialised || this._isTextElement) {
       return this;
+    }
+
+    if ((Array.isArray(value) && value.length <= 0) || value === null) {
+
+        this._store.activeItems.forEach((item) => this._removeItem(item));
+
+        if (this.config.setPlaceholderValueWhenRemoveAll === true && !this._isSelectMultipleElement) {
+            this.setChoiceByValue('')
+        }
+        return this
     }
 
     // If only one value has been passed, convert to array
