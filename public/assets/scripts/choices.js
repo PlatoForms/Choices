@@ -409,6 +409,7 @@ var Choices = /** @class */function () {
     }
   };
   Choices.prototype.destroy = function () {
+    var _this = this;
     if (!this.initialised) {
       return;
     }
@@ -418,6 +419,23 @@ var Choices = /** @class */function () {
     this.clearStore();
     if (this._isSelectElement) {
       this.passedElement.options = this._presetOptions;
+      if (this.config.getOptionAttrByKeys && this.config.getOptionAttrByKeys.length > 0) {
+        this.passedElement.options.forEach(function (optEle) {
+          var _loop_1 = function (index) {
+            var tmp_choice = _this._presetChoices[index];
+            if (tmp_choice.value == optEle.getAttribute('value')) {
+              _this.config.getOptionAttrByKeys.forEach(function (option_attr_key) {
+                if (tmp_choice.customProperties && tmp_choice.customProperties[option_attr_key]) {
+                  optEle.setAttribute(option_attr_key, tmp_choice.customProperties[option_attr_key]);
+                }
+              });
+            }
+          };
+          for (var index = 0; index < _this._presetChoices.length; index++) {
+            _loop_1(index);
+          }
+        });
+      }
     }
     this._templates = templates_1.default;
     this.initialised = false;

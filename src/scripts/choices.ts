@@ -384,6 +384,22 @@ class Choices implements Choices {
 
     if (this._isSelectElement) {
       (this.passedElement as WrappedSelect).options = this._presetOptions;
+
+      if (this.config.getOptionAttrByKeys && this.config.getOptionAttrByKeys.length > 0) {
+        (this.passedElement as WrappedSelect).options.forEach((optEle) => {
+            for (let index = 0; index < this._presetChoices.length; index++) {
+                const tmp_choice = this._presetChoices[index];
+                if (tmp_choice.value == optEle.getAttribute('value')) {
+                    this.config.getOptionAttrByKeys.forEach((option_attr_key) => {
+                        if (tmp_choice.customProperties && tmp_choice.customProperties[option_attr_key]) {
+                            optEle.setAttribute(option_attr_key, tmp_choice.customProperties[option_attr_key])
+                        }
+                    })
+                }
+            }
+        })
+      }
+
     }
 
     this._templates = templates;
