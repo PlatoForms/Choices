@@ -368,6 +368,16 @@ export interface Options {
   setPlaceholderValueWhenRemoveAll: boolean | null;
 
   /**
+   *
+   * If an array of keys is set, then calling getAttribute with those keys will retrieve the corresponding values and store them in the customProperties.
+   *
+   * **Input types affected:** select-one, select-multiple
+   *
+   * @default null
+   */
+  getOptionAttrByKeys: string[];
+
+  /**
    * Prepend a value to each item added/selected.
    *
    * **Input types affected:** text, select-one, select-multiple

@@ -61,6 +61,7 @@ export const DEFAULT_CONFIG: Options = {
   hidePlaceholderAfterSelection: false,
   keepSearchInputInOriginalPosition: false,
   setPlaceholderValueWhenRemoveAll: false,
+  getOptionAttrByKeys: [],
   searchPlaceholderValue: null,
   prependValue: null,
   appendValue: null,

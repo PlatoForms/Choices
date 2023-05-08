@@ -284,6 +284,15 @@ class Choices implements Choices {
     // Create array of choices from option elements
     if ((this.passedElement as WrappedSelect).options) {
       (this.passedElement as WrappedSelect).options.forEach((option) => {
+        let c_properties = parseCustomProperties(
+            option.dataset.customProperties,
+        )
+        if (this.config.getOptionAttrByKeys && this.config.getOptionAttrByKeys.length > 0) {
+            this.config.getOptionAttrByKeys.forEach((option_attr_key) => {
+                let option_attr_val = option.getAttribute(option_attr_key)
+                c_properties[option_attr_key] = option_attr_val
+            })
+        }
         this._presetChoices.push({
           value: option.value,
           label: option.innerHTML,
@@ -291,9 +300,7 @@ class Choices implements Choices {
           disabled: option.disabled || option.parentNode.disabled,
           placeholder:
             option.value === '' || option.hasAttribute('placeholder'),
-          customProperties: parseCustomProperties(
-            option.dataset.customProperties,
-          ),
+          customProperties: c_properties,
         });
       });
     }
