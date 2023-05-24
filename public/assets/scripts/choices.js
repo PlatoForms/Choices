@@ -559,6 +559,9 @@ var Choices = /** @class */function () {
   };
   Choices.prototype.showDropdown = function (preventInputFocus) {
     var _this = this;
+    if (this.passedElement.isDisabled || this.containerOuter.isDisabled) {
+      return this;
+    }
     if (this.dropdown.isActive) {
       return this;
     }

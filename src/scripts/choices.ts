@@ -517,6 +517,10 @@ class Choices implements Choices {
   }
 
   showDropdown(preventInputFocus?: boolean): this {
+    if (this.passedElement.isDisabled || this.containerOuter.isDisabled) {
+        return this;
+    }
+
     if (this.dropdown.isActive) {
       return this;
     }

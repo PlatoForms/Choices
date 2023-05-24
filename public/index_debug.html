@@ -505,8 +505,8 @@
           <option value="Newcastle">Newcastle</option>
         </select>
 
-        <label for="tube-stations">Tube stations</label>
-        <select class="form-control" name="tube-stations" id="tube-stations">
+        <label for="tube-stations" style="color: red;">Tube stations</label>
+        <select class="form-control" name="tube-stations" id="tube-stations" >
           <option value="">Choose a tube station</option>
           <option value="Moorgate">Moorgate</option>
           <option value="St Pauls">St Pauls</option>
@@ -669,6 +669,7 @@
             setPlaceholderValueWhenRemoveAll: true,
             placeholderValue: 'zzzzz11',
             getOptionAttrByKeys: ['data-value'],
+            searchResultLimit: 1000,
           }
         );
         window.multipleCancelButton = multipleCancelButton;
@@ -828,11 +829,15 @@
         //   labelId: 'choices-single-no-sorting-label',
         // });
 
-        // var cities = new Choices(document.getElementById('cities'), { allowHTML: true });
-        // var tubeStations = new Choices(
-        //   document.getElementById('tube-stations'),
-        //   { allowHTML: true }
-        // ).disable();
+        var cities = new Choices(document.getElementById('cities'), { allowHTML: true });
+
+        var selectEle = document.getElementById('tube-stations');
+        selectEle.removeAttribute('disabled');
+        console.log(['debug_kk3jfhgf', selectEle])
+        var tubeStations = new Choices(
+          selectEle,
+          { allowHTML: true }
+        ).disable();
 
         // cities.passedElement.element.addEventListener('change', function(e) {
         //   if (e.detail.value === 'London') {
